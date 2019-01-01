@@ -1,0 +1,94 @@
+
+body{
+    background-color: rebeccapurple;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+    color: chartreuse;
+    /* font-family: 'Bungee Shade', cursive;  */
+}
+.class-start-page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 3fr 1fr;
+    margin: 50px;
+    padding: 20px;
+    background-color:black;
+}
+.class-title-start-page{
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Bungee Shade', cursive;
+    font-size: xx-large;   
+}
+.class-img-start-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    background-color: chartreuse;
+}
+.class-img-start-page img{
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+}
+.class-center-button-start{
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+#game-page{
+    margin: 50px;
+    padding: 20px;
+    background-color:black;
+}
+
+#up-bar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+#down-bar{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+#count-moves{
+    display: flex;
+}
+#box-delivery{
+    display: flex;
+}
+.class-centrer-playground{
+    display: flex;
+    justify-content: center;
+}
+
+ /* en el contenedor padre utilizamos el CSS "display:grid" que ofrece la opcion de crear un tablon  
+con propiedades como el felxbox.*/
+
+.class-playground{
+    margin: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: fit-content;
+    height: fit-content;
+}
+
+/* <div class="box-playground"></div> */
+.box-playground{
+    width: 40px;
+    height: 40px;
+    background-color: darkgrey;
+}
+.box-deliver{
+    background-color: chocolate;
+    border: 3px solid brown;
+}
+.box-player{
+    background-color: darksalmon;
+     
+}
