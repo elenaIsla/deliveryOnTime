@@ -7,17 +7,17 @@ body{
     /* font-family: 'Bungee Shade', cursive;  */
 }
 .class-start-page{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 2fr 3fr 1fr;
     margin: 50px;
     padding: 20px;
+    height: 452px;
     background-color:black;
 }
 .class-title-start-page{
+    margin: 10px auto;
     height: 25%;
     display: flex;
     justify-content: center;
+    align-items: center;
     font-family: 'Bungee Shade', cursive;
     font-size: xx-large;   
 }
@@ -25,18 +25,28 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 50%;
     max-width: 100%;
-    background-color: chartreuse;
+    border: 3px solid chartreuse;
 }
 .class-img-start-page img{
     width: 70px;
     height: 70px;
     margin: 10px;
+    background-image: url('img/blue-1293919_1280.png');
+    background-size: cover;
 }
-.class-center-button-start{
+.class-button-start{
     display: flex;
     justify-content: center;
     padding: 40px;
+}
+.class-button-start button{
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: bolder;
+    color: blue;
+
 }
 
 #game-page{
@@ -64,6 +74,7 @@ body{
 .class-centrer-playground{
     display: flex;
     justify-content: center;
+    margin: 50px auto;
 }
 
  /* en el contenedor padre utilizamos el CSS "display:grid" que ofrece la opcion de crear un tablon  
@@ -85,10 +96,14 @@ con propiedades como el felxbox.*/
     background-color: darkgrey;
 }
 .box-deliver{
-    background-color: chocolate;
-    border: 3px solid brown;
+    /* background-color: chocolate;
+    border: 3px solid brown; */
+    background-image: url('img/box_2.png');
+    background-size: cover;
 }
 .box-player{
-    background-color: darksalmon;
+    background-color: darkgrey;
+    background-image: url('img/blue-1293919_1280.png');
+    background-size: cover;
      
 }
