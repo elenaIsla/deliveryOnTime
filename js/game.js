@@ -119,13 +119,29 @@ function goUp(){
     var playerBox = document.getElementsByClassName('box-player')[0];
     if(playground[player.x - 1][player.y] === 0 ){
         playerBox.className = "box-playground";
-        document.getElementById(`${player.x -1}${player.y}`).className = "box-player";       
+        document.getElementById(`${player.x - 1}${player.y}`).className = "box-player";       
         playground[player.x][player.y] = 0;
         playground[player.x - 1][player.y] = 3;
         player.x = player.x - 1;
+    }else if(playground[player.x - 1][player.y] === 2 && playground[player.x - 2][player.y] === 0){
+        playerBox.className = "box-playground";
+        document.getElementById(`${player.x - 1}${player.y}`).className = "box-player";
+        document.getElementById(`${player.x - 2}${player.y}`).className = "box-deliver";       
+        playground[player.x][player.y] = 0;
+        playground[player.x - 1][player.y] = 3;
+        playground[player.x - 2][player.y] = 2;
+        player.x = player.x - 1;
+        
     }
 }
-
+function movePlayer(positionPlayerX,positionPlayerY){
+    var playerBox = document.getElementsByClassName('box-player')[0];
+    playerBox.className = "box-playground";
+    document.getElementById(`${positionPlayerX}${positionPlayerY}`).className = "box-player";       
+    playground[positionPlayerX][positionPlayerY] = 0;
+    playground[positionPlayerX][positionPlayerY] = 3;
+    player.x = positionPlayerX;
+}
 function goRight(){
     var playerBox = document.getElementsByClassName('box-player')[0];
     if(playground[player.x][player.y + 1] === 0 ){
@@ -134,6 +150,15 @@ function goRight(){
         playground[player.x][player.y] = 0;
         playground[player.x][player.y + 1] = 3;
         player.y = player.y + 1;
+    }else if(playground[player.x][player.y + 1] === 2 && playground[player.x][player.y + 2] === 0){
+        playerBox.className = "box-playground";
+        document.getElementById(`${player.x}${player.y + 1}`).className = "box-player";
+        document.getElementById(`${player.x}${player.y + 2}`).className = "box-deliver";
+        playground[player.x][player.y] = 0;
+        playground[player.x][player.y + 1] = 3;
+        playground[player.x][player.y + 2] = 2;
+        player.y = player.y + 1;
+        
     }
 }
 
@@ -145,6 +170,16 @@ function goDown(){
         playground[player.x][player.y] = 0;
         playground[player.x + 1][player.y] = 3;
         player.x = player.x + 1;
+    }else if(playground[player.x + 1][player.y] === 2 && playground[player.x + 2][player.y] === 0){
+        playerBox.className = "box-playground";
+        document.getElementById(`${player.x + 1}${player.y}`).className = "box-player";
+        document.getElementById(`${player.x + 2}${player.y}`).className = "box-deliver"; 
+        playground[player.x][player.y] = 0;
+        playground[player.x + 1][player.y] = 3;
+        playground[player.x + 2][player.y] = 2;
+        player.x = player.x + 1;
+
+        
     }
 }
 
@@ -156,6 +191,15 @@ function goLeft(){
         playground[player.x][player.y] = 0;
         playground[player.x][player.y - 1] = 3;
         player.y = player.y - 1;
+    }else if(playground[player.x][player.y - 1] === 2 && playground[player.x][player.y - 2] === 0){
+        playerBox.className = "box-playground";
+        document.getElementById(`${player.x}${player.y - 1}`).className = "box-player";
+        document.getElementById(`${player.x}${player.y - 2}`).className = "box-deliver"; 
+        playground[player.x][player.y] = 0;
+        playground[player.x][player.y - 1] = 3;
+        playground[player.x][player.y - 2] = 2;
+        player.y = player.y - 1;
+        
     }
 }
 
