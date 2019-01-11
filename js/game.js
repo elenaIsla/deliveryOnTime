@@ -115,91 +115,88 @@ function assignControlsToKeys (){
       }
     };
   }
-function goUp(){
-    var playerBox = document.getElementsByClassName('box-player')[0];
-    if(playground[player.x - 1][player.y] === 0 ){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x - 1}${player.y}`).className = "box-player";       
-        playground[player.x][player.y] = 0;
-        playground[player.x - 1][player.y] = 3;
-        player.x = player.x - 1;
-    }else if(playground[player.x - 1][player.y] === 2 && playground[player.x - 2][player.y] === 0){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x - 1}${player.y}`).className = "box-player";
-        document.getElementById(`${player.x - 2}${player.y}`).className = "box-deliver";       
-        playground[player.x][player.y] = 0;
-        playground[player.x - 1][player.y] = 3;
-        playground[player.x - 2][player.y] = 2;
-        player.x = player.x - 1;
-        
+
+function movePlayer(PlayerPositionX,PlayerPositionY,direction){
+    document.getElementsByClassName('box-player')[0].className = "box-playground";
+    playground[PlayerPositionX][PlayerPositionY] = 0;
+    switch (direction){
+        case "up":
+            document.getElementById(`${PlayerPositionX - 1}${PlayerPositionY}`).className = "box-player";       
+            playground[PlayerPositionX - 1][PlayerPositionY] = 3;
+            player.x = PlayerPositionX - 1;
+            break;
+        case "down":
+            document.getElementById(`${PlayerPositionX + 1}${PlayerPositionY}`).className = "box-player";                   
+            playground[PlayerPositionX + 1][PlayerPositionY] = 3;
+            player.x = PlayerPositionX + 1;
+            break;
+        case "left":
+            document.getElementById(`${PlayerPositionX}${PlayerPositionY - 1}`).className = "box-player";                  
+            playground[PlayerPositionX][PlayerPositionY - 1] = 3;
+            player.y = PlayerPositionY - 1;
+            break;
+        case "right":
+            document.getElementById(`${PlayerPositionX}${PlayerPositionY + 1}`).className = "box-player";                  
+            playground[PlayerPositionX][PlayerPositionY + 1] = 3;
+            player.y = PlayerPositionY + 1;
+            break;
     }
 }
-function movePlayer(positionPlayerX,positionPlayerY){
-    var playerBox = document.getElementsByClassName('box-player')[0];
-    playerBox.className = "box-playground";
-    document.getElementById(`${positionPlayerX}${positionPlayerY}`).className = "box-player";       
-    playground[positionPlayerX][positionPlayerY] = 0;
-    playground[positionPlayerX][positionPlayerY] = 3;
-    player.x = positionPlayerX;
+
+function moveBox(BoxPositionX,BoxPositionY,direction){
+    switch(direction){
+        case "up":
+            document.getElementById(`${BoxPositionX - 2}${BoxPositionY}`).className = "box-deliver";
+            playground[BoxPositionX - 2][BoxPositionY] = 2;
+            break;
+        case "down":
+            document.getElementById(`${BoxPositionX + 2}${BoxPositionY}`).className = "box-deliver";
+            playground[BoxPositionX + 2][BoxPositionY] = 2;
+            break;
+        case "left":
+            document.getElementById(`${BoxPositionX}${BoxPositionY - 2}`).className = "box-deliver";
+            playground[BoxPositionX][BoxPositionY - 2] = 2;
+            break;
+        case "right":
+            document.getElementById(`${BoxPositionX}${BoxPositionY + 2}`).className = "box-deliver";
+            playground[BoxPositionX][BoxPositionY + 2] = 2;
+            break;
+    }
 }
+
+function goUp(){
+    if(playground[player.x - 1][player.y] === 0 ){
+        movePlayer(player.x, player.y, "up");
+    }else if(playground[player.x - 1][player.y] === 2 && playground[player.x - 2][player.y] === 0){ 
+        moveBox(player.x, player.y, "up");
+        movePlayer(player.x, player.y, "up");
+    }
+}
+
 function goRight(){
-    var playerBox = document.getElementsByClassName('box-player')[0];
     if(playground[player.x][player.y + 1] === 0 ){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x}${player.y + 1}`).className = "box-player"; 
-        playground[player.x][player.y] = 0;
-        playground[player.x][player.y + 1] = 3;
-        player.y = player.y + 1;
+        movePlayer(player.x, player.y, "right");
     }else if(playground[player.x][player.y + 1] === 2 && playground[player.x][player.y + 2] === 0){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x}${player.y + 1}`).className = "box-player";
-        document.getElementById(`${player.x}${player.y + 2}`).className = "box-deliver";
-        playground[player.x][player.y] = 0;
-        playground[player.x][player.y + 1] = 3;
-        playground[player.x][player.y + 2] = 2;
-        player.y = player.y + 1;
-        
+        moveBox(player.x, player.y, "right");
+        movePlayer(player.x, player.y, "right");       
     }
 }
 
 function goDown(){
-    var playerBox = document.getElementsByClassName('box-player')[0];
     if(playground[player.x + 1][player.y] === 0 ){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x + 1}${player.y}`).className = "box-player"; 
-        playground[player.x][player.y] = 0;
-        playground[player.x + 1][player.y] = 3;
-        player.x = player.x + 1;
+        movePlayer(player.x, player.y, "down");
     }else if(playground[player.x + 1][player.y] === 2 && playground[player.x + 2][player.y] === 0){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x + 1}${player.y}`).className = "box-player";
-        document.getElementById(`${player.x + 2}${player.y}`).className = "box-deliver"; 
-        playground[player.x][player.y] = 0;
-        playground[player.x + 1][player.y] = 3;
-        playground[player.x + 2][player.y] = 2;
-        player.x = player.x + 1;
-
-        
+        moveBox(player.x, player.y, "down");
+        movePlayer(player.x, player.y, "down");        
     }
 }
 
 function goLeft(){
-    var playerBox = document.getElementsByClassName('box-player')[0];
     if(playground[player.x][player.y - 1] === 0 ){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x}${player.y - 1}`).className = "box-player"; 
-        playground[player.x][player.y] = 0;
-        playground[player.x][player.y - 1] = 3;
-        player.y = player.y - 1;
+        movePlayer(player.x, player.y, "left");
     }else if(playground[player.x][player.y - 1] === 2 && playground[player.x][player.y - 2] === 0){
-        playerBox.className = "box-playground";
-        document.getElementById(`${player.x}${player.y - 1}`).className = "box-player";
-        document.getElementById(`${player.x}${player.y - 2}`).className = "box-deliver"; 
-        playground[player.x][player.y] = 0;
-        playground[player.x][player.y - 1] = 3;
-        playground[player.x][player.y - 2] = 2;
-        player.y = player.y - 1;
-        
+        moveBox(player.x, player.y, "left");
+        movePlayer(player.x, player.y, "left");        
     }
 }
 
