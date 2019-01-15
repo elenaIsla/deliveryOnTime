@@ -1,9 +1,9 @@
 
 body{
-    background-color: rebeccapurple;
+    background-color: dimgray;
     box-sizing: border-box;
     font-family: 'Press Start 2P', cursive;
-    color: chartreuse;
+    color: blue;
     /* font-family: 'Bungee Shade', cursive;  */
 }
 .class-start-page{
@@ -27,13 +27,13 @@ body{
     align-items: center;
     height: 50%;
     max-width: 100%;
-    border: 3px solid chartreuse;
+    border: 3px solid blue;
 }
 .class-img-start-page img{
     width: 70px;
     height: 70px;
     margin: 10px;
-    background-image: url('img/blue-1293919_1280.png');
+    background-image: url('img/player.png');
     background-size: cover;
 }
 .class-button-start{
@@ -89,21 +89,35 @@ con propiedades como el felxbox.*/
     height: fit-content;
 }
 
-/* <div class="box-playground"></div> */
+/* -----Clases para construir TABLERO */
+.box-wall{
+    background-image: url('img/white_brick_wall_@2X.png');
+    background-repeat: repeat;
+}
 .box-playground{
     width: 40px;
     height: 40px;
     background-color: darkgrey;
+    
+}
+.box-playground-solution{
+    background-color: darkgrey;
+    background-image: url('img/box.solution.png');
+    background-size: cover;
 }
 .box-deliver{
     /* background-color: chocolate;
     border: 3px solid brown; */
-    background-image: url('img/box_2.png');
+    background-image: url('img/box.png');
+    background-size: cover;
+}
+.box-deliver-on-time{
+    background-color: darkgrey;
+    background-image: url('img/box_deliver.png');
     background-size: cover;
 }
 .box-player{
     background-color: darkgrey;
-    background-image: url('img/blue-1293919_1280.png');
-    background-size: cover;
-     
+    background-image: url('img/player.png');
+    background-size: cover;    
 }

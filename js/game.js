@@ -11,14 +11,23 @@
 let playground = [[1,1,1,1,1,1],
                         [1,0,0,0,0,1],
                         [1,0,1,3,0,1],
-                        [1,0,0,2,0,1],
                         [1,0,2,2,0,1],
+                        [1,0,0,2,0,1],
                         [1,0,0,0,0,1],
                         [1,1,1,1,1,1]];
+
+let playgroundSolution = [["","","","","",""],
+                        ["","","","","",""],
+                        ["","","","","",""],
+                        ["","","",10,"",""],
+                        ["","",10,10,"",""],
+                        ["","","","","",""],
+                        ["","","","","",""]];                       
 let player = {
     x:2,
     y:3
 }
+let numberBoxWin = 3;
 
 function start(){
     displayGame();
@@ -65,6 +74,32 @@ function displayGame() {
     }
 }
 
+function checkIfBoxisRightPosition(BoxPositionX,BoxPositionY){
+    if(playgroundSolution[BoxPositionX][BoxPositionY] === 10){
+        console.log("hola");
+        return true;        
+    }
+}
+function checkIfisBoxSolution(BoxPositionX,BoxPositionY){
+    if(playgroundSolution[BoxPositionX][BoxPositionY] === 10 && playground[BoxPositionX][BoxPositionY] === 0){
+        return true;
+    }
+}
+
+function checkWinOrNot (numberBoxWin){
+    let boxDelivery = 0;
+    playground.forEach(function(row, i){
+        row.forEach(function(colum, j){
+            if(colum === playgroundSolution[i][j]){
+                boxDelivery = boxDelivery + 1;
+            }
+        })
+    })
+    if(boxDelivery === numberBoxWin){
+        console.log("Soy Cojonuda");
+    }
+        console.log("sigue moviendo cajas");
+}
 function buildPlayground (){   
 
     let playgroundHtml = document.getElementById('playground');
@@ -77,16 +112,25 @@ function buildPlayground (){
 //0 es el terreno; 1 es una barrera; 2 es la caja; 3 el jugador
 
                 case 0:
-                    boxHtml.setAttribute("class", "box-playground");
+                    if(checkIfisBoxSolution(i,j)){
+                        boxHtml.setAttribute("class", "box-playground-solution");
+                    }else{
+                        boxHtml.setAttribute("class", "box-playground");
+                    }
                     playgroundHtml.appendChild(boxHtml);
                     break;                       
                 case 1:
-                    boxHtml.style.backgroundColor = 'grey';
+                    boxHtml.setAttribute("class", "box-wall");
                     playgroundHtml.appendChild(boxHtml);                   
                     break;
                 case 2:
-                    boxHtml.setAttribute("class","box-deliver");                                       
-                    playgroundHtml.appendChild(boxHtml);                    
+                    if(checkIfBoxisRightPosition(i,j)){
+                        boxHtml.setAttribute("class","box-deliver-on-time");                                       
+                        playgroundHtml.appendChild(boxHtml);
+                    }else{
+                        boxHtml.setAttribute("class","box-deliver");                                       
+                        playgroundHtml.appendChild(boxHtml); 
+                    }                  
                     break; 
                 case 3:
                     boxHtml.setAttribute("class","box-player");                  
@@ -115,10 +159,15 @@ function assignControlsToKeys (){
       }
     };
   }
+  
 
 function movePlayer(PlayerPositionX,PlayerPositionY,direction){
-    document.getElementsByClassName('box-player')[0].className = "box-playground";
     playground[PlayerPositionX][PlayerPositionY] = 0;
+    if(checkIfisBoxSolution(PlayerPositionX, PlayerPositionY)){
+        document.getElementsByClassName('box-player')[0].className = "box-playground-solution"; 
+    }else{
+        document.getElementsByClassName('box-player')[0].className = "box-playground";
+    } 
     switch (direction){
         case "up":
             document.getElementById(`${PlayerPositionX - 1}${PlayerPositionY}`).className = "box-player";       
@@ -146,23 +195,44 @@ function movePlayer(PlayerPositionX,PlayerPositionY,direction){
 function moveBox(BoxPositionX,BoxPositionY,direction){
     switch(direction){
         case "up":
-            document.getElementById(`${BoxPositionX - 2}${BoxPositionY}`).className = "box-deliver";
+            if(checkIfBoxisRightPosition(BoxPositionX - 2,BoxPositionY)){
+                document.getElementById(`${BoxPositionX - 2}${BoxPositionY}`).className = "box-deliver-on-time";
+            }else{
+                document.getElementById(`${BoxPositionX - 2}${BoxPositionY}`).className = "box-deliver";
+            }
             playground[BoxPositionX - 2][BoxPositionY] = 2;
+            checkWinOrNot(numberBoxWin);
             break;
         case "down":
-            document.getElementById(`${BoxPositionX + 2}${BoxPositionY}`).className = "box-deliver";
+            if(checkIfBoxisRightPosition(BoxPositionX + 2,BoxPositionY)){
+                document.getElementById(`${BoxPositionX + 2}${BoxPositionY}`).className = "box-deliver-on-time";
+            }else{
+                document.getElementById(`${BoxPositionX + 2}${BoxPositionY}`).className = "box-deliver";
+            }
             playground[BoxPositionX + 2][BoxPositionY] = 2;
+            checkWinOrNot(numberBoxWin);
             break;
         case "left":
-            document.getElementById(`${BoxPositionX}${BoxPositionY - 2}`).className = "box-deliver";
+            if(checkIfBoxisRightPosition(BoxPositionX,BoxPositionY - 2)){
+                document.getElementById(`${BoxPositionX}${BoxPositionY - 2}`).className = "box-deliver-on-time";
+            }else{
+                document.getElementById(`${BoxPositionX}${BoxPositionY - 2}`).className = "box-deliver";
+            }
             playground[BoxPositionX][BoxPositionY - 2] = 2;
+            checkWinOrNot(numberBoxWin);
             break;
         case "right":
-            document.getElementById(`${BoxPositionX}${BoxPositionY + 2}`).className = "box-deliver";
+            if(checkIfBoxisRightPosition(BoxPositionX,BoxPositionY + 2)){
+                document.getElementById(`${BoxPositionX}${BoxPositionY + 2}`).className = "box-deliver-on-time";
+            }else{
+                document.getElementById(`${BoxPositionX}${BoxPositionY + 2}`).className = "box-deliver";
+            }
             playground[BoxPositionX][BoxPositionY + 2] = 2;
+            checkWinOrNot(numberBoxWin);
             break;
     }
 }
+
 
 function goUp(){
     if(playground[player.x - 1][player.y] === 0 ){
