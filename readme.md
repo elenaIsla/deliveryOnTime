@@ -52,6 +52,7 @@ Añadir los puntos de backlog.
 
 ## Links
 
+https://elenaisla.github.io/deliveryOnTime/
 
 ### Trello
 
@@ -60,10 +61,13 @@ https://trello.com/b/ULDkZ130/delivery-on-time-game
 
 
 ### Git
-URls for the project repo and deploy
+URls for the project repo: 
 
 https://github.com/elenaIsla/deliveryOnTime
 
+URls for the deploy:
+
+https://elenaisla.github.io/deliveryOnTime/
 
 ### Slides
 URls for the project presentation (slides)
