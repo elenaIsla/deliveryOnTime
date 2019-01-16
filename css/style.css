@@ -35,6 +35,8 @@ body{
     margin: 10px;
     background-image: url('img/player.png');
     background-size: cover;
+    background-color: white;
+
 }
 .class-button-start{
     display: flex;
@@ -65,9 +67,9 @@ body{
     flex-wrap: nowrap;
     justify-content: flex-end;
 }
-#count-moves{
+/* #count-moves{
     display: flex;
-}
+} */
 #box-delivery{
     display: flex;
 }
@@ -75,6 +77,7 @@ body{
     display: flex;
     justify-content: center;
     margin: 50px auto;
+    position: relative;
 }
 
  /* en el contenedor padre utilizamos el CSS "display:grid" que ofrece la opcion de crear un tablon  
@@ -120,4 +123,22 @@ con propiedades como el felxbox.*/
     background-color: darkgrey;
     background-image: url('img/player.png');
     background-size: cover;    
+}
+
+.class-win-page{
+    background-color: white;
+    color: blue;
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 50%;
+
+}
+
+.counter{
+    display: flex;
 }

@@ -28,12 +28,40 @@ let player = {
     y:3
 }
 let numberBoxWin = 3;
+let counterMovimentsPlayer = 0;
+let counterPushesBox = 0;
 
 function start(){
+    
     displayGame();
+    reStart();
     buildPlayground();
-    assignControlsToKeys();   
+    assignControlsToKeys();
+    
+     
 }
+
+function reStart (){
+    const buttonReStart = document.getElementById('button-reset');
+    buttonReStart.onclick = function (){
+        playground = [[1,1,1,1,1,1],
+                        [1,0,0,0,0,1],
+                        [1,0,1,3,0,1],
+                        [1,0,2,2,0,1],
+                        [1,0,0,2,0,1],
+                        [1,0,0,0,0,1],
+                        [1,1,1,1,1,1]];
+        player.x = 2;
+        player.y = 3;
+        counterMovimentsPlayer = 0;
+        resetCounter();
+        deleteBackground();
+        buildPlayground();
+        deleteWinPage();
+        console.log("si");
+    }
+}
+
 function displayStartPage() {
     const startPage = document.getElementById('start-page');
     startPage.style.display = 'block';
@@ -58,6 +86,7 @@ function displayStartPage() {
     divButtonStart.appendChild(button);
     startPage.appendChild(divButtonStart);
 }
+
 function displayGame() {
     const buttonStart = document.getElementById('button-start');
     buttonStart.onclick = function(){
@@ -80,29 +109,57 @@ function checkIfBoxisRightPosition(BoxPositionX,BoxPositionY){
         return true;        
     }
 }
+
 function checkIfisBoxSolution(BoxPositionX,BoxPositionY){
     if(playgroundSolution[BoxPositionX][BoxPositionY] === 10 && playground[BoxPositionX][BoxPositionY] === 0){
         return true;
     }
 }
 
-function checkWinOrNot (numberBoxWin){
+function checkWinOrNot (){
+    
     let boxDelivery = 0;
     playground.forEach(function(row, i){
         row.forEach(function(colum, j){
-            if(colum === playgroundSolution[i][j]){
+            if(colum == 2 && playgroundSolution[i][j] == 10){
                 boxDelivery = boxDelivery + 1;
+                console.log(boxDelivery)
+                if(boxDelivery == numberBoxWin){
+                    displayWinPage();
+                    console.log("win");
+                }
             }
         })
     })
-    if(boxDelivery === numberBoxWin){
-        console.log("Soy Cojonuda");
-    }
-        console.log("sigue moviendo cajas");
 }
-function buildPlayground (){   
 
-    let playgroundHtml = document.getElementById('playground');
+function displayWinPage (){
+    let divGame = document.getElementById('game-page');
+    let divWin = document.createElement('div');
+    divWin.setAttribute('class','class-win-page');
+    divWin.innerHTML = "YOU WIN!!!";
+    divGame.appendChild(divWin);
+}
+
+function deleteWinPage (){
+    let divGamePage = document.getElementById('game-page');
+    divGamePage.removeChild(document.getElementsByClassName('class-win-page')[0]);
+}
+
+function deleteBackground (){
+    const divPlayground = document.getElementById('div-playground');
+    divPlayground.removeChild(document.getElementById('playground'));
+}
+
+function buildPlayground (){   
+    
+    let divPlayground = document.getElementById('div-playground');
+    let playgroundHtml = document.createElement('div');
+    playgroundHtml.setAttribute("id","playground");
+    playgroundHtml.setAttribute("class","class-playground");
+    divPlayground.appendChild(playgroundHtml);
+    // let playgroundHtml = document.getElementById('playground');
+
     for(let i = 0; i < playground.length; i++){
         for(let j = 0; j < playground[i].length; j++){
             let boxHtml = document.createElement('div');
@@ -158,9 +215,8 @@ function assignControlsToKeys (){
           break; 
       }
     };
-  }
+}
   
-
 function movePlayer(PlayerPositionX,PlayerPositionY,direction){
     playground[PlayerPositionX][PlayerPositionY] = 0;
     if(checkIfisBoxSolution(PlayerPositionX, PlayerPositionY)){
@@ -173,21 +229,25 @@ function movePlayer(PlayerPositionX,PlayerPositionY,direction){
             document.getElementById(`${PlayerPositionX - 1}${PlayerPositionY}`).className = "box-player";       
             playground[PlayerPositionX - 1][PlayerPositionY] = 3;
             player.x = PlayerPositionX - 1;
+            counterMoviments();
             break;
         case "down":
             document.getElementById(`${PlayerPositionX + 1}${PlayerPositionY}`).className = "box-player";                   
             playground[PlayerPositionX + 1][PlayerPositionY] = 3;
             player.x = PlayerPositionX + 1;
+            counterMoviments();
             break;
         case "left":
             document.getElementById(`${PlayerPositionX}${PlayerPositionY - 1}`).className = "box-player";                  
             playground[PlayerPositionX][PlayerPositionY - 1] = 3;
             player.y = PlayerPositionY - 1;
+            counterMoviments();
             break;
         case "right":
             document.getElementById(`${PlayerPositionX}${PlayerPositionY + 1}`).className = "box-player";                  
             playground[PlayerPositionX][PlayerPositionY + 1] = 3;
             player.y = PlayerPositionY + 1;
+            counterMoviments();
             break;
     }
 }
@@ -200,8 +260,10 @@ function moveBox(BoxPositionX,BoxPositionY,direction){
             }else{
                 document.getElementById(`${BoxPositionX - 2}${BoxPositionY}`).className = "box-deliver";
             }
+            playground[BoxPositionX - 1][BoxPositionY] = 0;
             playground[BoxPositionX - 2][BoxPositionY] = 2;
-            checkWinOrNot(numberBoxWin);
+            counterPushes();
+            checkWinOrNot();
             break;
         case "down":
             if(checkIfBoxisRightPosition(BoxPositionX + 2,BoxPositionY)){
@@ -209,8 +271,10 @@ function moveBox(BoxPositionX,BoxPositionY,direction){
             }else{
                 document.getElementById(`${BoxPositionX + 2}${BoxPositionY}`).className = "box-deliver";
             }
+            playground[BoxPositionX + 1][BoxPositionY] = 0;
             playground[BoxPositionX + 2][BoxPositionY] = 2;
-            checkWinOrNot(numberBoxWin);
+            counterPushes();
+            checkWinOrNot();
             break;
         case "left":
             if(checkIfBoxisRightPosition(BoxPositionX,BoxPositionY - 2)){
@@ -218,8 +282,10 @@ function moveBox(BoxPositionX,BoxPositionY,direction){
             }else{
                 document.getElementById(`${BoxPositionX}${BoxPositionY - 2}`).className = "box-deliver";
             }
+            playground[BoxPositionX][BoxPositionY - 1] = 0;
             playground[BoxPositionX][BoxPositionY - 2] = 2;
-            checkWinOrNot(numberBoxWin);
+            counterPushes();
+            checkWinOrNot();
             break;
         case "right":
             if(checkIfBoxisRightPosition(BoxPositionX,BoxPositionY + 2)){
@@ -227,12 +293,13 @@ function moveBox(BoxPositionX,BoxPositionY,direction){
             }else{
                 document.getElementById(`${BoxPositionX}${BoxPositionY + 2}`).className = "box-deliver";
             }
+            playground[BoxPositionX][BoxPositionY + 1] = 0;
             playground[BoxPositionX][BoxPositionY + 2] = 2;
-            checkWinOrNot(numberBoxWin);
+            counterPushes();
+            checkWinOrNot();
             break;
     }
 }
-
 
 function goUp(){
     if(playground[player.x - 1][player.y] === 0 ){
@@ -270,10 +337,30 @@ function goLeft(){
     }
 }
 
+function counterMoviments (){  
+    counterMovimentsPlayer = counterMovimentsPlayer + 1;
+    document.getElementById('num-moves').innerHTML = counterMovimentsPlayer;
+}
+
+function resetCounter (){
+    document.getElementById('num-moves').innerHTML = 0;
+
+}
+
+function counterPushes (){  
+    counterPushesBox = counterPushesBox + 1;
+    document.getElementById('num-push').innerHTML = counterPushesBox;
+}
+
+function resetCounter (){
+    document.getElementById('num-push').innerHTML = 0;
+
+}
 
 
 
 document.onload = function (){
     displayStartPage();
     start();
+    
 }();
