@@ -1,10 +1,9 @@
-let level = 2;
-let game;
+let level = 1;
+let game = new Playground (level); 
 let counterMovimentsPlayer = 0;
 let counterPushesBox = 0;
 
-function start(){  
-    game = new Playground (level); 
+function start(){     
     displayGame();
     reStart();
     //passNextLevel();
@@ -13,9 +12,19 @@ function start(){
     assignControlsToKeys();    
 }
 
+function reTry (){
+    const buttonTryAgain = document.getElementById('button-try-again');
+    buttonTryAgain.onclick = function (){
+        resetCounter();
+        deleteBackground();
+        game.asignPlayground();
+        game.buildPlayground();
+        deleteWinPage();
+    }
+}
+
 function reStart (){
     const buttonReStart = document.getElementById('button-reset');
-    const buttonTryAgain = document.getElementById('button-try-again');
     buttonReStart.onclick = function (){
         resetCounter();
         deleteBackground();
@@ -27,10 +36,14 @@ function reStart (){
 }
 
 function passNextLevel (){
+
+    // const divgamePage = document.getElementById('game-page');
+    // divgamePage.removeChild(document.getElementsByClassName('class-win-page')[0]); 
     const buttonNextLevel = document.getElementById('button-next-level');
     buttonNextLevel.onclick = function (){
-        start();
-        
+        level = level + 1;
+        game = new Playground(level);
+        start();    
     }
 }
 
@@ -93,28 +106,31 @@ function checkWinOrNot (){
 
 function displayWinPage (){
 
-    //----borramos el reset para ponerel "try again"-----
-    let divResetButton = document.getElementById('div-button-reset');
-    divResetButton.removeChild(document.getElementById('button-reset'));
+    // //----borramos el reset para ponerel "try again"-----
+    // let divResetButton = document.getElementById('div-button-reset');
+    // divResetButton.removeChild(document.getElementById('button-reset'));
+    // let resetButton = document.createElement ('button');
+    // resetButton.setAttribute('id','button-try-again');
+    // resetButton.innerHTML = "Try again";
+    // divButtons.appendChild(resetButton);
 
     let divGame = document.getElementById('game-page');
     let divWin = document.createElement('div');
     divWin.setAttribute('class','class-win-page');
     divWin.innerHTML = "YOU WIN!!!";
-    divGame.appendChild(divWin);
+    
     let divButtons = document.createElement('div');
     divButtons.setAttribute('class','class-win-page-buttons');
-    divGame.appendChild(divButtons);
     let newLevelButton = document.createElement ('button');
     newLevelButton.innerHTML = "Next Level";
     newLevelButton.setAttribute('id','button-next-level');
-    let resetButton = document.createElement ('button');
-    resetButton.setAttribute('id','button-try-again');
-    resetButton.innerHTML = "Try again";
     divButtons.appendChild(newLevelButton);
-    divButtons.appendChild(resetButton);
-    level ++;
+    
+    divWin.appendChild(divButtons);
+    divGame.appendChild(divWin);
+    
     passNextLevel();
+    reTry();
 }
 
 function deleteWinPage (){
