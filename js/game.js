@@ -91,10 +91,10 @@ function displayWinPage (){
     let divGame = document.getElementById('game-page');
     let divWin = document.createElement('div');
     divWin.setAttribute('class','class-win-page');
-    divWin.innerHTML = "YOU WIN!!!";
+    divWin.innerHTML = "Well done!!!    ";
     let divButtons = document.createElement('div');
     let newLevelButton = document.createElement ('button');
-    newLevelButton.innerHTML = "Next Level";
+    newLevelButton.innerHTML = "NEXT LEVEL";
     newLevelButton.setAttribute('id','button-next-level');
     newLevelButton.setAttribute('class','class-button');
     divButtons.appendChild(newLevelButton);
