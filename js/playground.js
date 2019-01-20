@@ -26,7 +26,7 @@ class Playground {
         this.player.x = 2;
         this.player.y = 3;
         this.numberBoxWin = 3;
-    console.log ("nivel 1");
+
      }else if (this.level === 2){
         this.playground = [[1,1,1,1,"",""],
                             [1,0,0,1,"",""],
@@ -45,10 +45,43 @@ class Playground {
         this.player.x = 3;
         this.player.y = 2;
         this.numberBoxWin = 2;
-     }
- }
-
-
+     }else if (this.level === 3){
+        this.playground = [[1,1,1,1,1,1],
+                            [1,0,0,0,1,1],
+                            [1,3,2,2,0,1],
+                            [1,1,0,0,0,1],
+                            ["",1,1,0,0,1],
+                            ["","",1,1,0,1],
+                            ["","","",1,1,1]];
+        this.playgroundSolution = [["","","","","",""],
+                                    ["",10,"","","",""],
+                                    ["","","","","",""],
+                                    ["","","","","",""],
+                                    ["","","","","",""],
+                                    ["","","","",10,""],
+                                    ["","","","","",""]];
+        this.player.x = 2;
+        this.player.y = 1;
+        this.numberBoxWin = 2;
+    }else if (this.level === 4){
+        this.playground = [[1,1,1,1,1,1,1],
+                            [1,0,0,0,0,0,1],
+                            [1,0,1,0,1,0,1],
+                            [1,0,0,2,2,3,1],
+                            [1,0,0,0,1,1,1],
+                            [1,1,1,1,1,"",""]];
+                            
+        this.playgroundSolution = [["","","","","","",""],
+                                    ["","","","","","",""],
+                                    ["","","","","","",""],
+                                    ["","","","",10,"",""],
+                                    ["",10,"","","","",""],
+                                    ["","","","","","",""]];
+        this.player.x = 3;
+        this.player.y = 5;
+        this.numberBoxWin = 2;
+    }
+}
 
  buildPlayground (){ 
         // this.asignPlayground ();  
@@ -56,9 +89,13 @@ class Playground {
         let divPlayground = document.getElementById('div-playground');
         let playgroundHtml = document.createElement('div');
         playgroundHtml.setAttribute("id","playground");
-        playgroundHtml.setAttribute("class","class-playground");
-        divPlayground.appendChild(playgroundHtml);
-
+        if(this.level === 1 |  this.level === 2 | this.level === 3){
+            playgroundHtml.setAttribute("class",'class-playground');
+            divPlayground.appendChild(playgroundHtml);
+        }else if(this.level === 4){
+            playgroundHtml.setAttribute("class",`class-playground${this.level}`);
+            divPlayground.appendChild(playgroundHtml);
+        }
 // ------según el playground construimos un tablero diferente------
     
         for(let i = 0; i < this.playground.length; i++){

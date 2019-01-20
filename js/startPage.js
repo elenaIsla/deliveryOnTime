@@ -1,6 +1,7 @@
 function moveStartPageImages (){
 
     setInterval(function(){
+    
     setTimeout(function(){
         const div1 = document.getElementById('one');
         const div2 = document.getElementById('two');
@@ -26,12 +27,11 @@ function moveStartPageImages (){
         div5.className = 'class-deliver-on-time';
         
     },750);
-
     document.getElementById('one').className = 'class-player';
     document.getElementById('two').className = 'class-nothing';
     document.getElementById('three').className = 'class-deliver';
     document.getElementById('four').className = 'class-nothing';
     document.getElementById('five').className = 'class-playground-solution';
-
- },2000);
+    
+ },1000);
 }
