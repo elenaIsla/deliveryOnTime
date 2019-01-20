@@ -43,40 +43,14 @@ function passNextLevel (){
         game = new Playground (level)
         game.asignPlayground();
         game.buildPlayground();
+        showLevel();
         deleteWinPage();    
     }
-}
-
-function displayStartPage() {
-    const startPage = document.getElementById('start-page');
-    startPage.style.display = 'block';
-    const titleGame = document.createElement('h1');
-    titleGame.innerHTML = "Delibery on Time";
-    const divTitleGame = document.createElement('div');
-    divTitleGame.setAttribute("class", "class-title-start-page");
-    divTitleGame.appendChild(titleGame);
-    startPage.appendChild(divTitleGame);
-    const divImgesBoxes = document.createElement('div');
-    divImgesBoxes.setAttribute("class", "class-img-start-page");
-    const images = document.createElement('img'); 
-    divImgesBoxes.appendChild(images);
-    divImgesBoxes.appendChild(images);
-    divImgesBoxes.appendChild(images);
-    startPage.appendChild(divImgesBoxes);
-    const divButtonStart = document.createElement('div');
-    divButtonStart.setAttribute("class", "class-button-start");
-    const button = document.createElement('button');
-    button.setAttribute("id", "button-start");
-    button.innerHTML = "START";
-    divButtonStart.appendChild(button);
-    startPage.appendChild(divButtonStart);
 }
 
 function displayGame() {
     const buttonStart = document.getElementById('button-start');
     buttonStart.onclick = function(){
-        // const nonplayStart = document.getElementById('start-page').style.display = 'none';
-        // const displayGame = document.getElementById('game-page').style.display = 'inline';
         const gamePage = document.getElementById('game-page');
         const startPage = document.getElementById('start-page');
         if(gamePage.style.display === 'none'){
@@ -118,19 +92,15 @@ function displayWinPage (){
     let divWin = document.createElement('div');
     divWin.setAttribute('class','class-win-page');
     divWin.innerHTML = "YOU WIN!!!";
-    
     let divButtons = document.createElement('div');
-    divButtons.setAttribute('class','class-win-page-buttons');
     let newLevelButton = document.createElement ('button');
     newLevelButton.innerHTML = "Next Level";
     newLevelButton.setAttribute('id','button-next-level');
+    newLevelButton.setAttribute('class','class-button');
     divButtons.appendChild(newLevelButton);
-    
     divWin.appendChild(divButtons);
-    divGame.appendChild(divWin);
-    
-    passNextLevel();
-    
+    divGame.appendChild(divWin); 
+    passNextLevel(); 
 }
 
 function deleteWinPage (){
@@ -283,10 +253,19 @@ function goLeft(){
     }
 }
 
+//------contadores de movimientos jugador y cajas -------
+
 function counterMoviments (){  
     counterMovimentsPlayer = counterMovimentsPlayer + 1;
     document.getElementById('num-moves').innerHTML = counterMovimentsPlayer;
 }
+
+function counterPushes (){  
+    counterPushesBox = counterPushesBox + 1;
+    document.getElementById('num-push').innerHTML = counterPushesBox;
+}
+
+//------reset para los contadores -----------
 
 function resetCounter (){
     document.getElementById('num-moves').innerHTML = 0;
@@ -296,12 +275,14 @@ function resetCounter (){
 
 }
 
-function counterPushes (){  
-    counterPushesBox = counterPushesBox + 1;
-    document.getElementById('num-push').innerHTML = counterPushesBox;
+//------nivel de la partida --------
+
+function showLevel (){
+    document.getElementById('num-level').innerHTML = level;
 }
 
 document.onload = function (){
-    displayStartPage();
+    // displayStartPage();
+    moveStartPageImages();
     start();
 }();
