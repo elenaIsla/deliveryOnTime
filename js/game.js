@@ -6,7 +6,6 @@ let counterPushesBox = 0;
 function start(){     
     displayGame();
     reStart();
-    //passNextLevel();
     game.asignPlayground();
     game.buildPlayground(); 
     assignControlsToKeys();    
@@ -36,14 +35,15 @@ function reStart (){
 }
 
 function passNextLevel (){
-
-    // const divgamePage = document.getElementById('game-page');
-    // divgamePage.removeChild(document.getElementsByClassName('class-win-page')[0]); 
     const buttonNextLevel = document.getElementById('button-next-level');
     buttonNextLevel.onclick = function (){
         level = level + 1;
-        game = new Playground(level);
-        start();    
+        resetCounter();
+        deleteBackground();
+        game = new Playground (level)
+        game.asignPlayground();
+        game.buildPlayground();
+        deleteWinPage();    
     }
 }
 
@@ -130,13 +130,13 @@ function displayWinPage (){
     divGame.appendChild(divWin);
     
     passNextLevel();
-    reTry();
+    
 }
 
 function deleteWinPage (){
     let divGamePage = document.getElementById('game-page');
     divGamePage.removeChild(document.getElementsByClassName('class-win-page')[0]);
-    divGamePage.removeChild(document.getElementsByClassName('class-win-page-buttons')[0]);
+    // divGamePage.removeChild(document.getElementsByClassName('class-win-page-buttons')[0]);
 }
 
 function deleteBackground (){
