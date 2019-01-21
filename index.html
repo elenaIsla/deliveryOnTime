@@ -11,34 +11,39 @@
 </head>
 <body>
     <div id="start-page" class="class-start-page">
-        <!-- <div class="class-title-start-page">
-        <h1>Delibery on Time</h1>
+        <div class="class-title-start-page">
+        <h1>Delivery on Time</h1>
         </div>
+        <div class="class-wall-start-page"></div>
         <div class="class-img-start-page">
-            <img src="css/img/logo-amazon1.png" alt="">
-            <img src="css/img/logo-ebay.png" alt="">
-            <img src="css/img/logo-amazon1.png" alt="">
+            <div id="one" class="class-player"></div>
+            <div id="two" ></div>
+            <div id="three" class="class-deliver"></div> 
+            <div id="four" ></div>
+            <div id="five" class="class-playground-solution"></div>   
         </div>
+        <div class="class-wall-start-page"></div>
         <div class="class-button-start">
-        <button id="button-start">START</button>
-        </div> -->
+        <button id="button-start" class="class-button">START</button>
+        </div>
     </div>
     <div id="game-page" style="display:none">
 
         <div id="up-bar">
             <div class="counter"><p>Moves:</p><span id="num-moves">0</span></div>
             <div class="counter"><p>Pushes:</p><span id="num-push">0</span></div>
-            <div id="time">00:00</div>
+            <div class="counter counter-level"><p>Level:</p><span id="num-level">1</span></div>
         </div>
         <div id="div-playground" class="class-centrer-playground">
             <!-- <div id="playground" class="class-playground"></div>    -->
         </div>
         <div id="down-bar">
             <div id="div-button-reset">
-                <button id="button-reset">RESET</button>
+                <button id="button-reset" class="class-button">RESET</button>
             </div>
         </div>
     </div>
+<script src="js/startPage.js"></script>
 <script src="js/playground.js"></script>
 <script src="js/game.js"></script>
 
