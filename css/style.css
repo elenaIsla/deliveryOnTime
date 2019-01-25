@@ -13,7 +13,7 @@ body{
     padding: 20px;
     height: 452px;
     background-color:black;
-}
+}                       
 .class-title-start-page{
     margin: 10px auto;
     height: 25%;
@@ -49,6 +49,7 @@ body{
 }
 .class-button{
     padding: 10px;
+    margin: 13px 30px;
     font-family: 'Press Start 2P', cursive;
     font-weight: bolder;
     color: chartreuse;
@@ -57,7 +58,8 @@ body{
 
 }
 .class-button:hover{
-    background-color: blue;
+    color: black;
+    background-color: chartreuse;
 }
 .class-wall-start-page{
     display: flex;
@@ -86,6 +88,12 @@ body{
     background-color: darkgrey;
     background-image: url('img/player.png');
     background-size: cover;    
+}
+
+.class-imagen-globo{
+    background-image: url('img/Globo.png');
+    background-size: cover;
+
 }
 
 /* ------id y clases pagina GAME-------- */
@@ -133,7 +141,7 @@ Se crea según el tipo de nivel y tablero una clase diferente
     height: fit-content;
 }
 
-.class-playground4{
+.class-playground2{
     margin: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
