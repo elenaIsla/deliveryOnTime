@@ -25,13 +25,18 @@ function moveStartPageImages (){
         div3.className = 'class-nothing';
         div4.className ='class-player';
         div5.className = 'class-deliver-on-time';
+        const divGlobo = document.getElementsByClassName('class-img-start-page')[0];
+        const divGloboTexto = document.createElement('div');
+        divGloboTexto.setAttribute('class','class-imagen-globo');
+        divGlobo.appendChild(divGloboTexto);
         
-    },750);
+    },1050);
     document.getElementById('one').className = 'class-player';
     document.getElementById('two').className = 'class-nothing';
     document.getElementById('three').className = 'class-deliver';
     document.getElementById('four').className = 'class-nothing';
     document.getElementById('five').className = 'class-playground-solution';
     
- },1000);
+    
+ },3000);
 }

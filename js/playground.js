@@ -27,7 +27,27 @@ class Playground {
         this.player.y = 3;
         this.numberBoxWin = 3;
 
-     }else if (this.level === 2){
+     }else if (this.level === 3){
+        this.playground = [[1,1,1,1,1,""],
+                            [1,0,3,0,1,""],
+                            [1,0,0,0,1,""],
+                            [1,2,2,2,1,1],
+                            [1,0,0,0,0,1],
+                            [1,0,0,0,0,1],
+                            [1,1,1,1,1,1]];
+
+        this.playgroundSolution = [["","","","","",""],
+                                    ["","","","","",""],
+                                    ["",10,10,10,"",""],
+                                    ["","","","","",""],
+                                    ["","","","","",""],
+                                    ["","","","","",""],
+                                    ["","","","","",""]];
+        this.player.x = 1;
+        this.player.y = 2;
+        this.numberBoxWin = 3;
+
+     }else if (this.level === 4){
         this.playground = [[1,1,1,1,"",""],
                             [1,0,0,1,"",""],
                             [1,0,0,1,1,1],
@@ -45,7 +65,7 @@ class Playground {
         this.player.x = 3;
         this.player.y = 2;
         this.numberBoxWin = 2;
-     }else if (this.level === 3){
+     }else if (this.level === 5){
         this.playground = [[1,1,1,1,1,1],
                             [1,0,0,0,1,1],
                             [1,3,2,2,0,1],
@@ -63,7 +83,7 @@ class Playground {
         this.player.x = 2;
         this.player.y = 1;
         this.numberBoxWin = 2;
-    }else if (this.level === 4){
+    }else if (this.level === 2){
         this.playground = [[1,1,1,1,1,1,1],
                             [1,0,0,0,0,0,1],
                             [1,0,1,0,1,0,1],
@@ -80,19 +100,18 @@ class Playground {
         this.player.x = 3;
         this.player.y = 5;
         this.numberBoxWin = 2;
-    }
+    }   
 }
 
- buildPlayground (){ 
-        // this.asignPlayground ();  
-// -------seleccionamos el div / creamos div dentro / le asignamos una id y class / lo juntamos al div padre
+ buildPlayground (){         
+// -------seleccionamos el div / creamos div dentro / le asignamos una id y class / lo juntamos al div padre 
         let divPlayground = document.getElementById('div-playground');
         let playgroundHtml = document.createElement('div');
         playgroundHtml.setAttribute("id","playground");
-        if(this.level === 1 |  this.level === 2 | this.level === 3){
+        if(this.level === 1 |  this.level === 3 | this.level === 4 | this.level === 5){
             playgroundHtml.setAttribute("class",'class-playground');
             divPlayground.appendChild(playgroundHtml);
-        }else if(this.level === 4){
+        }else if(this.level === 2){
             playgroundHtml.setAttribute("class",`class-playground${this.level}`);
             divPlayground.appendChild(playgroundHtml);
         }
@@ -154,3 +173,4 @@ class Playground {
     }
 
 }
+
